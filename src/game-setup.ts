@@ -1,4 +1,4 @@
-import { shuffle as _shuffle, uniq as _uniq } from "lodash";
+import { shuffle as _shuffle, uniq as _uniq, difference } from "lodash";
 
 export enum Color {
   Red = "red",
@@ -110,24 +110,63 @@ export const addMore = (
   currentCards: Array<number>,
   cardsInGame: Array<number>
 ): Array<number> => {
-  // [1, 2, 3, 4]
-  // [1, 2, 4, 5]
-  // [1, 2, 5, 4]
+  // [1, 2, 3, 4, 5, 6] -> current cards
+  // [1, 2, 4, 6, 7, 8] -> new cards
+  // steps
+  // [1, 2, 8, 4, 5, 6]
+  // [1, 2, 8, 4, 7, 6]
 
   const newCards = cardsInGame.slice(0, currentCards.length);
-
-  const r = currentCards.reduce((cards: Array<number>, card, index) => {
-    if (newCards[index] === currentCards[index]) {
-      cards[index] = card;
-      return cards;
-    } else {
-      return [
-        ...cards.slice(0, index),
-        cards[cards.length - 1],
-        ...currentCards.slice(index + 1),
-      ];
+  const newNumbers = difference(newCards, currentCards);
+  return currentCards.map((n) => {
+    if (!newCards.includes(n)) {
+      return newNumbers.pop();
     }
-  }, newCards);
+    return n;
+  });
+
+  const check = (oldArr: number[], newArr: number[], idx: number) => {
+    return newArr.reduce((n: number[], curr, index) => {
+      if (oldArr[index] === n[index]) {
+        return n;
+      } else {
+        // console.log("newArr", n);
+        // console.log("oldArr", [
+        //   ...oldArr.slice(idx, index),
+        //   n[n.length - 1],
+        //   ...oldArr.slice(index),
+        // ]);
+        // console.log("idx", idx);
+        // return n;
+        console.log("curr", curr);
+        console.log("идь", idx);
+        console.log(
+          "[...n.slice(idx), n[n.length - 1], ...oldArr.slice(idx + 1)]",
+          [...n.slice(0, idx), n[n.length - 1], ...oldArr.slice(idx + 1)]
+        );
+        return check(
+          [...n.slice(idx), n[n.length - 1], ...oldArr.slice(idx + 1)],
+          newArr,
+          idx + index + 1
+        );
+      }
+    }, newArr);
+  };
+
+  const r = check(currentCards, newCards, 0);
+
+  // const r = currentCards.reduce((cards: Array<number>, card, index) => {
+  //   if (newCards[index] === currentCards[index]) {
+  //     cards[index] = card;
+  //     return cards;
+  //   } else {
+  //     // return r([
+  //     //   ...cards.slice(0, index),
+  //     //   cards[cards.length - 1],
+  //     //   ...cards.slice(index + 1),
+  //     // ]);
+  //   }
+  // }, newCards);
   console.log(r);
   return r;
 };

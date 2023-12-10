@@ -19,7 +19,7 @@ interface Props {
   selected: boolean;
 }
 
-const StyledCard = styled.div<{ $selected: boolean }>`
+const CardStyled = styled.div<{ $selected: boolean }>`
   background-color: white;
   margin: 20px;
   width: 140px;
@@ -29,19 +29,19 @@ const StyledCard = styled.div<{ $selected: boolean }>`
     props.$selected ? "0px 0px 15px #4B5563" : "0px 0px 15px #97aac6"};
 `;
 
-const Svg = styled(ReactSVG)<{ $color: string; $fill: string }>`
+const SvgStyled = styled(ReactSVG)<{ $color: string; $fill: string }>`
   fill: ${(props) =>
     props.$color === Color.Red
       ? "#b967ff"
       : props.$color === Color.Blue
       ? "#01cdfe"
-      : "#04E590"};
+      : "#19d432"};
   height: 50px;
   width: 50px;
   margin: 5px;
 `;
 
-const ShapesContainer = styled.div`
+const ShapesContainerStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,12 +81,12 @@ export const Card: React.FC<Props> = ({ card, onClick, selected }) => {
   };
 
   return (
-    <StyledCard $selected={selected} onClick={onClick}>
-      <ShapesContainer>
+    <CardStyled $selected={selected} onClick={onClick}>
+      <ShapesContainerStyled>
         {card.id}
         {_range(Number(card.number)).map((num) => {
           return (
-            <Svg
+            <SvgStyled
               key={num}
               src={getShape()}
               $color={card.color}
@@ -94,7 +94,7 @@ export const Card: React.FC<Props> = ({ card, onClick, selected }) => {
             />
           );
         })}
-      </ShapesContainer>
-    </StyledCard>
+      </ShapesContainerStyled>
+    </CardStyled>
   );
 };

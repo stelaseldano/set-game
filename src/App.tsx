@@ -1,18 +1,29 @@
-import "./App.css";
-import { createGame, isItASet } from "./game-setup";
-import {
-  range as _range,
-  difference as _difference,
-  isEqual as _isEqual,
-} from "lodash";
+import { addMore, createGame, isItASet } from "./game-setup";
+import { difference as _difference, isEqual as _isEqual } from "lodash";
 import * as React from "react";
 import { Card } from "./components/Card";
+import styled from "styled-components";
 
 const ADD = 3;
 enum SHOWING {
   Default = 12,
   More = 15,
 }
+
+const AppStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #d9e0ea;
+`;
+
+const CardsContainerStyled = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(3, 1fr);
+`;
 
 function App() {
   const { shuffledCards: cardsIds, cardsReference } = React.useMemo(
@@ -23,9 +34,8 @@ function App() {
     []
   );
   const [cardsInGame, setCardsInGame] = React.useState<Array<number>>(cardsIds);
-  const [showingCards, setShowingCards] = React.useState<Array<number>>([]);
-  const [displayedCardsTotal, setDisplayedCardsTotal] = React.useState(
-    SHOWING.Default
+  const [showingCards, setShowingCards] = React.useState<Array<number>>(
+    cardsInGame.slice(0, SHOWING.Default)
   );
 
   const selectedCards = React.useMemo(() => {
@@ -33,57 +43,37 @@ function App() {
   }, [cardsReference, selectedCardsIds]);
 
   React.useEffect(() => {
-    setShowingCards(cardsInGame.slice(0, displayedCardsTotal));
-  }, [displayedCardsTotal, cardsInGame, cardsIds]);
-
-  React.useEffect(() => {
     if (selectedCards.length === ADD) {
       const isASet = isItASet(selectedCards);
 
-      if (isASet && displayedCardsTotal === SHOWING.Default) {
+      if (isASet) {
         setCardsInGame(
           cardsInGame.filter((cardId) => !selectedCardsIds.includes(cardId))
         );
+        setSelectedCardsIds([]);
       }
     }
-  }, [selectedCards, displayedCardsTotal, cardsInGame, selectedCardsIds]);
+  }, [selectedCards, cardsInGame, selectedCardsIds, showingCards]);
 
   React.useEffect(() => {
-    const newCardsIds = cardsInGame.slice(0, SHOWING.Default);
-
-    const newCards = showingCards.reduce((newCards, card, index) => {
-      if (showingCards[index] === newCardsIds[index]) {
-        newCards[index] = card;
+    const newCards = addMore(showingCards, cardsInGame);
+    if (!_isEqual(newCards, showingCards)) {
+      if (cardsInGame.length > SHOWING.Default) {
+        setShowingCards(newCards.slice(0, SHOWING.Default));
       } else {
-        newCards = [
-          ...newCards.slice(0, index),
-          newCardsIds[newCards.length - 1],
-        ];
-        // [newCards[index], newCards[newCards.length - 1]] = [
-        //   newCards[newCards.length - 1],
-        //   cardsInGame[index],
-        // ];
-        console.log(newCards);
+        setShowingCards(cardsInGame);
       }
-
-      return newCards;
-    }, []);
-
-    if (!_isEqual(newCardsIds, showingCards)) {
-      setShowingCards(newCardsIds);
-      setSelectedCardsIds([]);
     }
-  }, [cardsInGame]);
+  }, [cardsInGame, showingCards]);
 
   return (
-    <div className="App">
-      <div className="cards">
+    <AppStyled>
+      <CardsContainerStyled>
         {showingCards.map((cardId) => {
           const card = cardsReference[cardId];
           return (
             <Card
-              key={card["id"]}
-              // spot={index}
+              key={card.id}
               card={card}
               selected={selectedCardsIds.includes(cardId)}
               onClick={() => {
@@ -96,14 +86,16 @@ function App() {
             />
           );
         })}
-      </div>
+      </CardsContainerStyled>
       <button
-        onClick={() => setDisplayedCardsTotal(SHOWING.More)}
-        disabled={displayedCardsTotal === SHOWING.More}
+        onClick={() => {
+          setShowingCards(cardsInGame.slice(0, SHOWING.More));
+        }}
+        disabled={showingCards.length === SHOWING.More}
       >
         add more
       </button>
-    </div>
+    </AppStyled>
   );
 }
 
