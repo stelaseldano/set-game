@@ -27,13 +27,15 @@ const CardsContainerStyled = styled.div`
 
 function App() {
   const { shuffledCards: cardsIds, cardsReference } = React.useMemo(
-    () => createGame(),
+    createGame,
     []
   );
   const [selectedCardsIds, setSelectedCardsIds] = React.useState<Array<number>>(
     []
   );
-  const [cardsInGame, setCardsInGame] = React.useState<Array<number>>(cardsIds);
+  const [cardsInGame, setCardsInGame] = React.useState<Array<number>>(
+    cardsIds.slice(0, 18)
+  );
   const [showingCards, setShowingCards] = React.useState<Array<number>>(
     cardsInGame.slice(0, SHOWING.Default)
   );
@@ -47,24 +49,20 @@ function App() {
       const isASet = isItASet(selectedCards);
 
       if (isASet) {
-        setCardsInGame(
-          cardsInGame.filter((cardId) => !selectedCardsIds.includes(cardId))
+        const newCardsInGame = cardsInGame.filter(
+          (cardId) => !selectedCardsIds.includes(cardId)
         );
+
+        const newShowingCards = addMore(showingCards, newCardsInGame);
+
+        if (!_isEqual(newShowingCards, showingCards)) {
+          setShowingCards(newShowingCards.slice(0, SHOWING.Default));
+        }
+        setCardsInGame(newCardsInGame);
         setSelectedCardsIds([]);
       }
     }
   }, [selectedCards, cardsInGame, selectedCardsIds, showingCards]);
-
-  React.useEffect(() => {
-    const newCards = addMore(showingCards, cardsInGame);
-    if (!_isEqual(newCards, showingCards)) {
-      if (cardsInGame.length > SHOWING.Default) {
-        setShowingCards(newCards.slice(0, SHOWING.Default));
-      } else {
-        setShowingCards(cardsInGame);
-      }
-    }
-  }, [cardsInGame, showingCards]);
 
   return (
     <AppStyled>
@@ -91,7 +89,10 @@ function App() {
         onClick={() => {
           setShowingCards(cardsInGame.slice(0, SHOWING.More));
         }}
-        disabled={showingCards.length === SHOWING.More}
+        disabled={
+          showingCards.length === SHOWING.More ||
+          cardsInGame.length < SHOWING.More
+        }
       >
         add more
       </button>

@@ -118,12 +118,14 @@ export const addMore = (
 
   const newCards = cardsInGame.slice(0, currentCards.length);
   const newNumbers = difference(newCards, currentCards);
-  return currentCards.map((n) => {
-    if (!newCards.includes(n)) {
-      return newNumbers.pop();
-    }
-    return n;
-  });
+  return currentCards.length > cardsInGame.length
+    ? cardsInGame
+    : currentCards.map((n) => {
+        if (!newCards.includes(n)) {
+          return newNumbers.pop();
+        }
+        return n;
+      });
 
   const check = (oldArr: number[], newArr: number[], idx: number) => {
     return newArr.reduce((n: number[], curr, index) => {
