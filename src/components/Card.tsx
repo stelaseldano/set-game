@@ -12,11 +12,14 @@ import RectNone from "../assets/rect_none.svg";
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 import { range as _range } from "lodash";
+import { useSpring, animated } from "@react-spring/web";
 
 interface Props {
   card: CardType;
   onClick: () => void;
   selected: boolean;
+  isNotInSet?: boolean;
+  isInSet?: boolean;
 }
 
 const CardStyled = styled.div<{ $selected: boolean }>`
@@ -49,7 +52,44 @@ const ShapesContainerStyled = styled.div`
   height: 100%;
 `;
 
-export const Card: React.FC<Props> = ({ card, onClick, selected }) => {
+export const Card: React.FC<Props> = ({
+  card,
+  onClick,
+  selected,
+  isNotInSet = false,
+  isInSet = false,
+}) => {
+  const domTarget = React.useRef(null);
+
+  const [{ x, y }, api] = useSpring(() => ({
+    x: 0,
+    y: 0,
+    config: { mass: 1, tension: 250, friction: 30 },
+  }));
+
+  const { scale } = useSpring({ scale: selected ? 1.05 : 1 });
+
+  React.useEffect(() => {
+    if (!isNotInSet) {
+      api.start({
+        to: [
+          { x: 0, y: 0 },
+          { x: -3, y: 2 },
+          { x: 5, y: -3 },
+          { x: 0, y: 0 },
+          { x: 7, y: 3 },
+          { x: -7, y: -2 },
+          { x: 0, y: 0 },
+        ],
+        config: {
+          duration: 60,
+          decay: 0,
+          bounce: 2,
+        },
+      });
+    }
+  }, [isNotInSet, api, isInSet]);
+
   const getShape = () => {
     if (card.shape === Shape.Oval && card.fill === Fill.None) {
       return OvalNone;
@@ -81,20 +121,28 @@ export const Card: React.FC<Props> = ({ card, onClick, selected }) => {
   };
 
   return (
-    <CardStyled $selected={selected} onClick={onClick}>
-      <ShapesContainerStyled>
-        {card.id}
-        {_range(Number(card.number)).map((num) => {
-          return (
-            <SvgStyled
-              key={num}
-              src={getShape()}
-              $color={card.color}
-              $fill={card.fill}
-            />
-          );
-        })}
-      </ShapesContainerStyled>
-    </CardStyled>
+    <animated.div
+      ref={domTarget}
+      style={{
+        scale,
+        x,
+        y,
+      }}
+    >
+      <CardStyled $selected={selected} onClick={onClick}>
+        <ShapesContainerStyled>
+          {_range(Number(card.number)).map((num) => {
+            return (
+              <SvgStyled
+                key={num}
+                src={getShape()}
+                $color={card.color}
+                $fill={card.fill}
+              />
+            );
+          })}
+        </ShapesContainerStyled>
+      </CardStyled>
+    </animated.div>
   );
 };

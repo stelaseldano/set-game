@@ -3,6 +3,7 @@ import { difference as _difference, isEqual as _isEqual } from "lodash";
 import * as React from "react";
 import { Card } from "./components/Card";
 import styled from "styled-components";
+import { CardPile } from "./components/CardPile";
 
 const ADD = 3;
 enum SHOWING {
@@ -12,8 +13,7 @@ enum SHOWING {
 
 const AppStyled = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 100vh;
   background-color: #d9e0ea;
@@ -25,24 +25,21 @@ const CardsContainerStyled = styled.div`
   grid-template-rows: repeat(3, 1fr);
 `;
 
+const { shuffledCards: cardsIds, cardsReference } = createGame();
+
 function App() {
-  const { shuffledCards: cardsIds, cardsReference } = React.useMemo(
-    createGame,
-    []
-  );
   const [selectedCardsIds, setSelectedCardsIds] = React.useState<Array<number>>(
     []
   );
-  const [cardsInGame, setCardsInGame] = React.useState<Array<number>>(
-    cardsIds.slice(0, 18)
-  );
+  const [cardsInGame, setCardsInGame] = React.useState<Array<number>>(cardsIds);
   const [showingCards, setShowingCards] = React.useState<Array<number>>(
     cardsInGame.slice(0, SHOWING.Default)
   );
+  const [wrongSet, setWrongSet] = React.useState<Array<number>>([]);
 
   const selectedCards = React.useMemo(() => {
     return selectedCardsIds.map((c) => cardsReference[c]);
-  }, [cardsReference, selectedCardsIds]);
+  }, [selectedCardsIds]);
 
   React.useEffect(() => {
     if (selectedCards.length === ADD) {
@@ -52,7 +49,6 @@ function App() {
         const newCardsInGame = cardsInGame.filter(
           (cardId) => !selectedCardsIds.includes(cardId)
         );
-
         const newShowingCards = addMore(showingCards, newCardsInGame);
 
         if (!_isEqual(newShowingCards, showingCards)) {
@@ -60,12 +56,22 @@ function App() {
         }
         setCardsInGame(newCardsInGame);
         setSelectedCardsIds([]);
+      } else {
+        setWrongSet(selectedCardsIds);
       }
     }
   }, [selectedCards, cardsInGame, selectedCardsIds, showingCards]);
 
+  React.useEffect(() => {
+    if (wrongSet.length === ADD) {
+      setWrongSet([]);
+      setSelectedCardsIds([]);
+    }
+  }, [wrongSet]);
+
   return (
     <AppStyled>
+      <CardPile cardsTotal={cardsInGame.length - showingCards.length} />
       <CardsContainerStyled>
         {showingCards.map((cardId) => {
           const card = cardsReference[cardId];
@@ -74,6 +80,7 @@ function App() {
               key={card.id}
               card={card}
               selected={selectedCardsIds.includes(cardId)}
+              isNotInSet={!wrongSet.includes(card.id)}
               onClick={() => {
                 if (selectedCardsIds.includes(cardId)) {
                   setSelectedCardsIds(_difference(selectedCardsIds, [cardId]));
@@ -85,7 +92,7 @@ function App() {
           );
         })}
       </CardsContainerStyled>
-      <button
+      {/* <button
         onClick={() => {
           setShowingCards(cardsInGame.slice(0, SHOWING.More));
         }}
@@ -95,7 +102,8 @@ function App() {
         }
       >
         add more
-      </button>
+      </button> */}
+      <CardPile cardsTotal={3} />
     </AppStyled>
   );
 }
