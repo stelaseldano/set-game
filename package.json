@@ -2,7 +2,7 @@
   "name": "set-game",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https:/stelaseldano.github.io",
+  "homepage": "https:/stelaseldano.github.io/set-game",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@react-spring/web": "^9.7.3",
