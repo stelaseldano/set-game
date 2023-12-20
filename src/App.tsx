@@ -3,7 +3,6 @@ import { difference as _difference, isEqual as _isEqual } from "lodash";
 import * as React from "react";
 import { Card } from "./components/Card";
 import styled from "styled-components";
-import { CardPile } from "./components/CardPile";
 
 const ADD = 3;
 enum SHOWING {
@@ -13,7 +12,8 @@ enum SHOWING {
 
 const AppStyled = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   height: 100vh;
   background-color: #d9e0ea;
@@ -71,7 +71,6 @@ function App() {
 
   return (
     <AppStyled>
-      <CardPile cardsTotal={cardsInGame.length - showingCards.length} />
       <CardsContainerStyled>
         {showingCards.map((cardId) => {
           const card = cardsReference[cardId];
@@ -92,7 +91,7 @@ function App() {
           );
         })}
       </CardsContainerStyled>
-      {/* <button
+      <button
         onClick={() => {
           setShowingCards(cardsInGame.slice(0, SHOWING.More));
         }}
@@ -102,8 +101,7 @@ function App() {
         }
       >
         add more
-      </button> */}
-      <CardPile cardsTotal={3} />
+      </button>
     </AppStyled>
   );
 }
