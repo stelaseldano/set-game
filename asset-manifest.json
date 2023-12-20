@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.js": "/stelaseldano.github.io/static/js/main.5ae4a62c.js",
-    "static/js/787.d2b19803.chunk.js": "/stelaseldano.github.io/static/js/787.d2b19803.chunk.js",
-    "static/media/oval_semi.svg": "/stelaseldano.github.io/static/media/oval_semi.4290b48aa5e917cf3fe5304871730a55.svg",
-    "static/media/tri_semi.svg": "/stelaseldano.github.io/static/media/tri_semi.81c6e58fc45980bb18fd8b488ca862c6.svg",
-    "static/media/rect_semi.svg": "/stelaseldano.github.io/static/media/rect_semi.79fa1189b580d6e1d8ead0b95b400dbf.svg",
-    "index.html": "/stelaseldano.github.io/index.html",
-    "static/media/oval_none.svg": "/stelaseldano.github.io/static/media/oval_none.abbc6f1b1b0186baf9b67884f5e3458e.svg",
-    "static/media/rect_none.svg": "/stelaseldano.github.io/static/media/rect_none.3669f86d6c2d6de0fe2800930b3c27fb.svg",
-    "static/media/tri_full.svg": "/stelaseldano.github.io/static/media/tri_full.f87cff0aaaf36acdb231f011323e8c90.svg",
-    "static/media/rect_full.svg": "/stelaseldano.github.io/static/media/rect_full.2b69ff44b07b6c3a7f07a43e1fce9139.svg",
-    "static/media/oval_full.svg": "/stelaseldano.github.io/static/media/oval_full.7f03f2f4bc7780be498c6403088e4a39.svg",
-    "static/media/tri_none.svg": "/stelaseldano.github.io/static/media/tri_none.e73e36d748053242aff85236f8d938ee.svg",
-    "main.5ae4a62c.js.map": "/stelaseldano.github.io/static/js/main.5ae4a62c.js.map",
-    "787.d2b19803.chunk.js.map": "/stelaseldano.github.io/static/js/787.d2b19803.chunk.js.map"
+    "main.js": "/stelaseldano.github.io/set-game/static/js/main.8419396c.js",
+    "static/js/787.d2b19803.chunk.js": "/stelaseldano.github.io/set-game/static/js/787.d2b19803.chunk.js",
+    "static/media/oval_semi.svg": "/stelaseldano.github.io/set-game/static/media/oval_semi.4290b48aa5e917cf3fe5304871730a55.svg",
+    "static/media/tri_semi.svg": "/stelaseldano.github.io/set-game/static/media/tri_semi.81c6e58fc45980bb18fd8b488ca862c6.svg",
+    "static/media/rect_semi.svg": "/stelaseldano.github.io/set-game/static/media/rect_semi.79fa1189b580d6e1d8ead0b95b400dbf.svg",
+    "index.html": "/stelaseldano.github.io/set-game/index.html",
+    "static/media/oval_none.svg": "/stelaseldano.github.io/set-game/static/media/oval_none.abbc6f1b1b0186baf9b67884f5e3458e.svg",
+    "static/media/rect_none.svg": "/stelaseldano.github.io/set-game/static/media/rect_none.3669f86d6c2d6de0fe2800930b3c27fb.svg",
+    "static/media/tri_full.svg": "/stelaseldano.github.io/set-game/static/media/tri_full.f87cff0aaaf36acdb231f011323e8c90.svg",
+    "static/media/rect_full.svg": "/stelaseldano.github.io/set-game/static/media/rect_full.2b69ff44b07b6c3a7f07a43e1fce9139.svg",
+    "static/media/oval_full.svg": "/stelaseldano.github.io/set-game/static/media/oval_full.7f03f2f4bc7780be498c6403088e4a39.svg",
+    "static/media/tri_none.svg": "/stelaseldano.github.io/set-game/static/media/tri_none.e73e36d748053242aff85236f8d938ee.svg",
+    "main.8419396c.js.map": "/stelaseldano.github.io/set-game/static/js/main.8419396c.js.map",
+    "787.d2b19803.chunk.js.map": "/stelaseldano.github.io/set-game/static/js/787.d2b19803.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.5ae4a62c.js"
+    "static/js/main.8419396c.js"
   ]
 }
