@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/set-game/static/css/main.7e7aff20.css",
-    "main.js": "/set-game/static/js/main.096f3b8b.js",
+    "main.js": "/set-game/static/js/main.d243e774.js",
     "static/js/787.d2b19803.chunk.js": "/set-game/static/js/787.d2b19803.chunk.js",
-    "static/media/oval_semi.svg": "/set-game/static/media/oval_semi.4290b48aa5e917cf3fe5304871730a55.svg",
-    "static/media/tri_semi.svg": "/set-game/static/media/tri_semi.81c6e58fc45980bb18fd8b488ca862c6.svg",
-    "static/media/rect_semi.svg": "/set-game/static/media/rect_semi.79fa1189b580d6e1d8ead0b95b400dbf.svg",
+    "static/media/oval_semi.svg": "/set-game/static/media/oval_semi.c7d9816a1418d9788bd04cead52cb10c.svg",
+    "static/media/tri_semi.svg": "/set-game/static/media/tri_semi.4811d4db08526807a7fc379ea1eba18c.svg",
+    "static/media/rect_semi.svg": "/set-game/static/media/rect_semi.4b0177e015883bebcec7c69c9b127c84.svg",
     "index.html": "/set-game/index.html",
-    "static/media/oval_none.svg": "/set-game/static/media/oval_none.abbc6f1b1b0186baf9b67884f5e3458e.svg",
-    "static/media/rect_none.svg": "/set-game/static/media/rect_none.3669f86d6c2d6de0fe2800930b3c27fb.svg",
-    "static/media/tri_full.svg": "/set-game/static/media/tri_full.f87cff0aaaf36acdb231f011323e8c90.svg",
-    "static/media/rect_full.svg": "/set-game/static/media/rect_full.2b69ff44b07b6c3a7f07a43e1fce9139.svg",
-    "static/media/oval_full.svg": "/set-game/static/media/oval_full.7f03f2f4bc7780be498c6403088e4a39.svg",
-    "static/media/tri_none.svg": "/set-game/static/media/tri_none.e73e36d748053242aff85236f8d938ee.svg",
+    "static/media/oval_none.svg": "/set-game/static/media/oval_none.f2c089aee57a65dfb334210b1f2a8671.svg",
+    "static/media/rect_none.svg": "/set-game/static/media/rect_none.7efef186dde0bd1eb277032592caea86.svg",
+    "static/media/tri_full.svg": "/set-game/static/media/tri_full.6f75438540b9d4497458ce986775096d.svg",
+    "static/media/rect_full.svg": "/set-game/static/media/rect_full.8a75adf2a7e8873aaa2ca0012fe857b6.svg",
+    "static/media/oval_full.svg": "/set-game/static/media/oval_full.03fca5f6f7481375d7378651757af379.svg",
+    "static/media/tri_none.svg": "/set-game/static/media/tri_none.8f0a88912005907c64f5222e028a4dd9.svg",
     "main.7e7aff20.css.map": "/set-game/static/css/main.7e7aff20.css.map",
-    "main.096f3b8b.js.map": "/set-game/static/js/main.096f3b8b.js.map",
+    "main.d243e774.js.map": "/set-game/static/js/main.d243e774.js.map",
     "787.d2b19803.chunk.js.map": "/set-game/static/js/787.d2b19803.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7e7aff20.css",
-    "static/js/main.096f3b8b.js"
+    "static/js/main.d243e774.js"
   ]
 }
