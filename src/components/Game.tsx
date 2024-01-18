@@ -14,10 +14,10 @@ enum SHOWING {
   More = 15,
 }
 
-const AppStyled = styled.div`
+const GameStyled = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 100vh;
   background-color: ${({ theme }) => theme.backgroundColor};
@@ -74,7 +74,7 @@ function Game({ onThemeChange }: Props) {
   }, [wrongSet]);
 
   return (
-    <AppStyled>
+    <GameStyled>
       <button onClick={onThemeChange}>change theme</button>
       <CardsContainerStyled>
         {showingCards.map((cardId) => {
@@ -107,7 +107,7 @@ function Game({ onThemeChange }: Props) {
       >
         add more
       </button>
-    </AppStyled>
+    </GameStyled>
   );
 }
 

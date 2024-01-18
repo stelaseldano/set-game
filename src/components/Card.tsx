@@ -12,8 +12,8 @@ import RectNone from "../assets/rect_none.svg";
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 import { useSpring, animated } from "@react-spring/web";
-import "./Card.css";
-import { colors } from "../theme/cards";
+import { colors, cardSize, shapeSize } from "../theme/cards";
+import { ScreenSizeContext } from "../screen/ScreenSizeProvider";
 
 interface Props {
   card: CardType;
@@ -23,11 +23,11 @@ interface Props {
   isInSet?: boolean;
 }
 
-const CardStyled = styled.div<{ $selected: boolean }>`
+const CardStyled = styled.div<{ $selected: boolean; $screen: string }>`
   background-color: ${({ theme }) => theme.card.background};
-  margin: 20px;
-  width: 140px;
-  height: 200px;
+  margin: ${({ $screen }) => cardSize[$screen].margin};
+  height: ${({ $screen }) => cardSize[$screen].height};
+  width: ${({ $screen }) => cardSize[$screen].width};
   border-radius: 10px;
   box-shadow: ${({ $selected, theme }) =>
     $selected ? theme.card.boxShadow.selected : theme.card.boxShadow.default};
@@ -49,14 +49,13 @@ export const Card: React.FC<Props> = ({
   isInSet = false,
 }) => {
   const domTarget = React.useRef(null);
-
   const [{ x, y }, api] = useSpring(() => ({
     x: 0,
     y: 0,
     config: { mass: 1, tension: 250, friction: 30 },
   }));
-
   const { scale } = useSpring({ scale: selected ? 1.05 : 1 });
+  const screen = React.useContext(ScreenSizeContext);
 
   React.useEffect(() => {
     if (!isNotInSet) {
@@ -118,7 +117,7 @@ export const Card: React.FC<Props> = ({
         y,
       }}
     >
-      <CardStyled $selected={selected} onClick={onClick}>
+      <CardStyled $selected={selected} $screen={screen} onClick={onClick}>
         <ShapesContainerStyled>
           {Array.apply(null, { length: card.number }).map(
             (_: null, i: number) => {
@@ -126,7 +125,6 @@ export const Card: React.FC<Props> = ({
                 <ReactSVG
                   key={`${card.id}-${i}`}
                   src={getShape()}
-                  // @ts-ignore
                   color={card.color}
                   fill={card.fill}
                   className="card"
@@ -137,6 +135,9 @@ export const Card: React.FC<Props> = ({
                         : card.color === Color.Blue
                         ? colors.blue
                         : colors.green,
+                    margin: shapeSize[screen].margin,
+                    width: shapeSize[screen].width,
+                    height: shapeSize[screen].width,
                   }}
                 />
               );
