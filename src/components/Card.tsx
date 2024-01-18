@@ -13,6 +13,7 @@ import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 import { useSpring, animated } from "@react-spring/web";
 import "./Card.css";
+import { colors } from "../theme/cards";
 
 interface Props {
   card: CardType;
@@ -23,13 +24,13 @@ interface Props {
 }
 
 const CardStyled = styled.div<{ $selected: boolean }>`
-  background-color: white;
+  background-color: ${({ theme }) => theme.card.background};
   margin: 20px;
   width: 140px;
   height: 200px;
   border-radius: 10px;
-  box-shadow: ${(props) =>
-    props.$selected ? "0px 0px 15px #4B5563" : "0px 0px 15px #97aac6"};
+  box-shadow: ${({ $selected, theme }) =>
+    $selected ? theme.card.boxShadow.selected : theme.card.boxShadow.default};
 `;
 
 const ShapesContainerStyled = styled.div`
@@ -132,10 +133,10 @@ export const Card: React.FC<Props> = ({
                   style={{
                     fill:
                       card.color === Color.Red
-                        ? "#b967ff"
+                        ? colors.red
                         : card.color === Color.Blue
-                        ? "#01cdfe"
-                        : "#04E590",
+                        ? colors.blue
+                        : colors.green,
                   }}
                 />
               );
