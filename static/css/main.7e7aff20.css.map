@@ -1,1 +1,0 @@
-{"version":3,"file":"static/css/main.7e7aff20.css","mappings":"AAAA,MACI,WAAY,CAEZ,UAAW,CADX,UAEJ","sources":["components/Card.css"],"sourcesContent":[".card {\n    height: 50px;\n    width: 50px;\n    margin: 5px;\n}"],"names":[],"sourceRoot":""}
