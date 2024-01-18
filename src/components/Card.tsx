@@ -11,7 +11,6 @@ import RectFull from "../assets/rect_full.svg";
 import RectNone from "../assets/rect_none.svg";
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
-import { range as _range } from "lodash";
 import { useSpring, animated } from "@react-spring/web";
 
 interface Props {
@@ -133,17 +132,19 @@ export const Card: React.FC<Props> = ({
     >
       <CardStyled $selected={selected} onClick={onClick}>
         <ShapesContainerStyled>
-          {_range(Number(card.number)).map((num) => {
-            return (
-              <SvgStyled
-                key={num}
-                src={getShape()}
-                // @ts-ignore
-                $color={card.color}
-                $fill={card.fill}
-              />
-            );
-          })}
+          {Array.apply(null, { length: card.number }).map(
+            (_: null, i: number) => {
+              return (
+                <SvgStyled
+                  key={`${card.id}-${i}`}
+                  src={getShape()}
+                  // @ts-ignore
+                  $color={card.color}
+                  $fill={card.fill}
+                />
+              );
+            }
+          )}
         </ShapesContainerStyled>
       </CardStyled>
     </animated.div>
