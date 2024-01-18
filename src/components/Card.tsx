@@ -12,6 +12,7 @@ import RectNone from "../assets/rect_none.svg";
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 import { useSpring, animated } from "@react-spring/web";
+import "./Card.css";
 
 interface Props {
   card: CardType;
@@ -29,20 +30,6 @@ const CardStyled = styled.div<{ $selected: boolean }>`
   border-radius: 10px;
   box-shadow: ${(props) =>
     props.$selected ? "0px 0px 15px #4B5563" : "0px 0px 15px #97aac6"};
-`;
-
-const SvgStyled = styled(ReactSVG)<{}>`
-  fill: ${(props) =>
-    // @ts-ignore
-    props.$color === Color.Red
-      ? "#b967ff"
-      : // @ts-ignore
-      props.$color === Color.Blue
-      ? "#01cdfe"
-      : "#19d432"};
-  height: 50px;
-  width: 50px;
-  margin: 5px;
 `;
 
 const ShapesContainerStyled = styled.div`
@@ -135,12 +122,21 @@ export const Card: React.FC<Props> = ({
           {Array.apply(null, { length: card.number }).map(
             (_: null, i: number) => {
               return (
-                <SvgStyled
+                <ReactSVG
                   key={`${card.id}-${i}`}
                   src={getShape()}
                   // @ts-ignore
-                  $color={card.color}
-                  $fill={card.fill}
+                  color={card.color}
+                  fill={card.fill}
+                  className="card"
+                  style={{
+                    fill:
+                      card.color === Color.Red
+                        ? "#b967ff"
+                        : card.color === Color.Blue
+                        ? "#01cdfe"
+                        : "#04E590",
+                  }}
                 />
               );
             }
