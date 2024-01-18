@@ -1,6 +1,6 @@
 import { isItASet, addMore, Color, Fill, Number, Shape } from "./game-setup";
 
-it.skip("test correctly checking existing sets", () => {
+it("test correctly checking existing sets", () => {
   expect(
     isItASet([
       {

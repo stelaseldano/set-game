@@ -32,11 +32,13 @@ const CardStyled = styled.div<{ $selected: boolean }>`
     props.$selected ? "0px 0px 15px #4B5563" : "0px 0px 15px #97aac6"};
 `;
 
-const SvgStyled = styled(ReactSVG)<{ $color: string; $fill: string }>`
+const SvgStyled = styled(ReactSVG)<{}>`
   fill: ${(props) =>
+    // @ts-ignore
     props.$color === Color.Red
       ? "#b967ff"
-      : props.$color === Color.Blue
+      : // @ts-ignore
+      props.$color === Color.Blue
       ? "#01cdfe"
       : "#19d432"};
   height: 50px;
@@ -136,6 +138,7 @@ export const Card: React.FC<Props> = ({
               <SvgStyled
                 key={num}
                 src={getShape()}
+                // @ts-ignore
                 $color={card.color}
                 $fill={card.fill}
               />
