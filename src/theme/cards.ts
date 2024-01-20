@@ -10,11 +10,11 @@ export const shapeSize = {
     margin: "5px",
   },
   m: {
-    width: "30px",
+    width: "40px",
     margin: "3px",
   },
   s: {
-    width: "20px",
+    width: "25px",
     margin: "2px",
   },
 };
@@ -31,8 +31,8 @@ export const cardSize = {
     margin: "10px",
   },
   s: {
-    height: "90px",
-    width: "65px",
+    height: "110px",
+    width: "70px",
     margin: "5px",
   },
 };
