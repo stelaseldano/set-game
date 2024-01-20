@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/set-game/static/js/main.168fbec2.js",
+    "main.js": "/set-game/static/js/main.66035d63.js",
     "static/js/787.d2b19803.chunk.js": "/set-game/static/js/787.d2b19803.chunk.js",
     "static/media/oval_semi.svg": "/set-game/static/media/oval_semi.c7d9816a1418d9788bd04cead52cb10c.svg",
     "static/media/tri_semi.svg": "/set-game/static/media/tri_semi.4811d4db08526807a7fc379ea1eba18c.svg",
@@ -12,10 +12,10 @@
     "static/media/rect_full.svg": "/set-game/static/media/rect_full.8a75adf2a7e8873aaa2ca0012fe857b6.svg",
     "static/media/oval_full.svg": "/set-game/static/media/oval_full.03fca5f6f7481375d7378651757af379.svg",
     "static/media/tri_none.svg": "/set-game/static/media/tri_none.8f0a88912005907c64f5222e028a4dd9.svg",
-    "main.168fbec2.js.map": "/set-game/static/js/main.168fbec2.js.map",
+    "main.66035d63.js.map": "/set-game/static/js/main.66035d63.js.map",
     "787.d2b19803.chunk.js.map": "/set-game/static/js/787.d2b19803.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.168fbec2.js"
+    "static/js/main.66035d63.js"
   ]
 }
